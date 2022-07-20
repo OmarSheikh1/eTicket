@@ -21,6 +21,6 @@ namespace eTicket.Models
         public string Bio { get; set; }
 
         //Relationships
-        ublic List<Movie> Movies { get; set; }
+        public List<Movie> Movies { get; set; }
     }
 }

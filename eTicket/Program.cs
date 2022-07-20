@@ -1,9 +1,25 @@
+using eTicket.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
+IWebHostEnvironment environment = builder.Environment;
+
+
+//IConfiguration configuration = app.Configuration;
+//IWebHostEnvironment environment = app.Environment;
+
+//DbContext configrations.
+builder.Services.AddDbContext<AppDbContext>(options => 
+    options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionString")
+    ));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
