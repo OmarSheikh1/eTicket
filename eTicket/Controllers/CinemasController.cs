@@ -4,17 +4,17 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Controllers
 {
-    public class CimemasController : Controller
+    public class CinemasController : Controller
     {
         public AppDbContext _appDbContext { get; }
-        public CimemasController(AppDbContext appDbContext)
+        public CinemasController(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
-            var dataProducers = await _appDbContext.Producers.ToListAsync();
-            return View();
+            var data = await _appDbContext.Cinemas.ToListAsync();
+            return View(data);
         }
     }
 }

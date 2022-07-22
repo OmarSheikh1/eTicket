@@ -11,10 +11,10 @@ namespace eTicket.Controllers
         {
             _appDbContext = appDbContext;
         }
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
-            var dataCinemas = await _appDbContext.Cinemas.ToListAsync();
-            return View();
+            var data = await _appDbContext.Movies.ToListAsync();
+            return View(data);
         }
     }
 }
