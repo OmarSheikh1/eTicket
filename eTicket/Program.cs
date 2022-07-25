@@ -7,10 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 ConfigurationManager configuration = builder.Configuration; // allows both to access and to set up the config
 IWebHostEnvironment environment = builder.Environment;
 
-
-//IConfiguration configuration = app.Configuration;
-//IWebHostEnvironment environment = app.Environment;
-
 //DbContext configrations.
 builder.Services.AddDbContext<AppDbContext>(options => 
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionString")
@@ -34,6 +30,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
