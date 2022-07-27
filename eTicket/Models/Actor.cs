@@ -6,6 +6,8 @@ namespace eTicket.Models
     {
         [Key]
         public int Id { get; set; }
+        //Relationships
+        public List<Actor_Movie> Actors_Movies { get; set; }
 
         [Display(Name = "Profile Picture")]
         [Required(ErrorMessage = "Profile Picture is required")]
@@ -20,7 +22,5 @@ namespace eTicket.Models
         [Required(ErrorMessage = "Biography is required")]
         public string Bio { get; set; }
 
-        //Relationships
-        public List<Actor_Movie> Actors_Movies { get; set; }
     }
 }

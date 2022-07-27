@@ -6,11 +6,11 @@ namespace eTicket.Data.Services
     {
         Task<IEnumerable<Actor>> GetAllAsync();
 
-        Actor GetById(int id);
+        Task<Actor> GetByIdAsync(int id);
 
-        void Add(Actor actor);
+        Task AddAsync(Actor actor);
 
-        Actor Update(int id,Actor newActor);
+        Task<Actor> UpdateAsync(int id,Actor newActor);
 
         void Delete(int id);
     }
