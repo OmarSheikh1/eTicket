@@ -65,7 +65,7 @@ namespace eTicket.Controllers
             //{
             //    return View(actor);
             //}
-            await _actorService.UpdateAsync(id,actor);
+            await _actorService.Update(id,actor);
             return RedirectToAction(nameof(Index));
         }
 
