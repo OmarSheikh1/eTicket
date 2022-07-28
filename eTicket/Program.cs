@@ -14,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //Services
 builder.Services.AddScoped<IActorService, ActorsService>();
+builder.Services.AddScoped<IProducerService,ProducerService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
