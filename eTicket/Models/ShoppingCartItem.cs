@@ -11,6 +11,6 @@ namespace eTicket.Models
         public int Amount { get; set; }
 
 
-        public string ShoppingCartId { get; set; }
+        public int ShoppingCartId { get; set; }
     }
 }
