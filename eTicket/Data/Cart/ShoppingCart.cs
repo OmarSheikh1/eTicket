@@ -70,7 +70,7 @@ namespace eTicket.Data.Cart
         
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
-            return ShoppingCartItems ?? (ShoppingCartItems = _apDbContext.ShoppingCartItems.Where(n => n.Id ==
+            return ShoppingCartItems ?? (ShoppingCartItems = _apDbContext.ShoppingCartItems.Where(n => n.ShoppingCartId ==
             ShoppingCartId).Include(n => n.Movie).ToList());
         }
 
