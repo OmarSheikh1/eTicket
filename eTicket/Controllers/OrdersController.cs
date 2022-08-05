@@ -40,5 +40,16 @@ namespace eTicket.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<RedirectToActionResult> RemoveItemFromShoppingCart(int id)
+        {
+            var item = await _moviesService.GetMovieByIdAsync(id);
+
+            if (item != null)
+            {
+                _shoppingCart.RemoveItemFromCart(item);
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
