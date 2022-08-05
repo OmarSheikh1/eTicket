@@ -1,17 +1,29 @@
 ﻿using eTicket.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace eTicket.Data.Cart
 {
     public class ShoppingCart
     {
         private AppDbContext _apDbContext { get; }
-        public int ShoppingCartId { get; set; }
+        public string ShoppingCartId { get; set; }
 
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
         public ShoppingCart(AppDbContext appDbContext)
         {
             _apDbContext = appDbContext;
+        }
+
+        public static ShoppingCart GetShoppingCart(IServiceProvider services)
+        {
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            var context = services.GetService<AppDbContext>();
+
+            string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
+            session.SetString("CartId", cartId);
+
+            return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
         public void AddItemToCart(Movie movie)

@@ -1,4 +1,5 @@
 using eTicket.Data;
+using eTicket.Data.Cart;
 using eTicket.Data.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //Services
 builder.Services.AddScoped<IActorService, ActorsService>();
 builder.Services.AddScoped<IProducerService,ProducerService>();
+builder.Services.AddScoped<IMoviesService, MoviesService>();
+
+//builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
