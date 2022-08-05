@@ -17,8 +17,11 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IActorService, ActorsService>();
 builder.Services.AddScoped<IProducerService,ProducerService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
+builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 
-//builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+builder.Services.AddSession();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -39,6 +42,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 
