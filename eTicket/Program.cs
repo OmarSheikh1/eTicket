@@ -17,6 +17,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped<IActorService, ActorsService>();
 builder.Services.AddScoped<IProducerService,ProducerService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
+builder.Services.AddScoped<IOrdersService, OrdersService>();
 builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
 
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));

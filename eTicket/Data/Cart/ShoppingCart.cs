@@ -67,7 +67,12 @@ namespace eTicket.Data.Cart
             _apDbContext.SaveChanges();
 
         }
-        
+
+        public Task clearShoppingCartAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
             return ShoppingCartItems ?? (ShoppingCartItems = _apDbContext.ShoppingCartItems.Where(n => n.ShoppingCartId ==
