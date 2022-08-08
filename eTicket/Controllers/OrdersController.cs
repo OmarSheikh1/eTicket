@@ -55,14 +55,14 @@ namespace eTicket.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public async IActionResult CompleteOrders()
-        {
-            var items = _shoppingCart.GetShoppingCartItems();
-            string userEmailAddress = "";
-            string userId = "";
+        //public async IActionResult CompleteOrders()
+        //{
+        //    var items = _shoppingCart.GetShoppingCartItems();
+        //    string userEmailAddress = "";
+        //    string userId = "";
 
-           await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
-            await _shoppingCart.clearShoppingCartAsync();
-        }
+        //   await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
+        //   // await _shoppingCart.clearShoppingCartAsync();
+        //}
     }
 }

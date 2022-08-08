@@ -68,9 +68,9 @@ namespace eTicket.Data.Cart
 
         }
 
-        public Task clearShoppingCartAsync()
+        public async Task clearShoppingCartAsync()
         {
-            throw new NotImplementedException();
+            //var items = _shp
         }
 
         public List<ShoppingCartItem> GetShoppingCartItems()
