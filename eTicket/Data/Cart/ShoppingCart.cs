@@ -62,7 +62,7 @@ namespace eTicket.Data.Cart
                 else
                 {
                     _apDbContext.ShoppingCartItems.Remove(shoppingCartItem);
-                }                
+                }
             }
             _apDbContext.SaveChanges();
 
@@ -70,7 +70,11 @@ namespace eTicket.Data.Cart
 
         public async Task clearShoppingCartAsync()
         {
-            //var items = _shp
+            var items = await _apDbContext.ShoppingCartItems
+                .Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
+            _apDbContext.ShoppingCartItems.RemoveRange(items);
+            await _apDbContext.SaveChangesAsync();
+
         }
 
         public List<ShoppingCartItem> GetShoppingCartItems()
