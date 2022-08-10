@@ -1,6 +1,5 @@
 ﻿using eTicket.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace eTicket.Data.Cart
 {

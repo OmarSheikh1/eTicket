@@ -1,5 +1,4 @@
-﻿using eTicket.Data;
-using eTicket.Data.Services;
+﻿using eTicket.Data.Services;
 using eTicket.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,7 +17,7 @@ namespace eTicket.Controllers
         {
             var data = await _actorService.GetAllAsync();
             return View(data);
-    }
+        }
 
         //Get : Actor/Create
         public IActionResult Create()
@@ -27,7 +26,7 @@ namespace eTicket.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")]Actor actor)
+        public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
         {
             //if (!ModelState.IsValid) 
             //{
@@ -59,13 +58,13 @@ namespace eTicket.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id,[Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
         {
             //if (!ModelState.IsValid)
             //{
             //    return View(actor);
             //}
-            await _actorService.Update(id,actor);
+            await _actorService.Update(id, actor);
             return RedirectToAction(nameof(Index));
         }
 
@@ -80,7 +79,7 @@ namespace eTicket.Controllers
             return View(actor);
         }
 
-        [HttpPost,ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             //if (!ModelState.IsValid)

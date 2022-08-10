@@ -9,16 +9,16 @@ ConfigurationManager configuration = builder.Configuration; // allows both to ac
 IWebHostEnvironment environment = builder.Environment;
 
 //DbContext configrations.
-builder.Services.AddDbContext<AppDbContext>(options => 
+builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(configuration.GetConnectionString("DefaultConnectionString")
     ));
 
 //Services
 builder.Services.AddScoped<IActorService, ActorsService>();
-builder.Services.AddScoped<IProducerService,ProducerService>();
+builder.Services.AddScoped<IProducerService, ProducerService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
 builder.Services.AddScoped<IOrdersService, OrdersService>();
-builder.Services.AddSingleton<IHttpContextAccessor,HttpContextAccessor>();
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 

@@ -1,9 +1,7 @@
-﻿using eTicket.Data;
-using eTicket.Data.Services;
+﻿using eTicket.Data.Services;
 using eTicket.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Controllers
 {

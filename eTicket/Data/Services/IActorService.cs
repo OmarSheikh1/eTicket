@@ -4,6 +4,6 @@ using eTicket.Models;
 namespace eTicket.Data.Services
 {
     public interface IActorService : IRepository<Actor>
-    {       
+    {
     }
 }

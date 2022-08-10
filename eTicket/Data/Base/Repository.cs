@@ -55,7 +55,7 @@ namespace eTicket.Data.Base
 
         public async Task Update(int id, T entity)
         {
-           EntityEntry entityEntry = _appDbContext.Entry<T>(entity);
+            EntityEntry entityEntry = _appDbContext.Entry<T>(entity);
             entityEntry.State = EntityState.Modified;
             await _appDbContext.SaveChangesAsync();
         }
