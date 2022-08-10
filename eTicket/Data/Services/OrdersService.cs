@@ -11,17 +11,9 @@ namespace eTicket.Data.Services
             _context = context;
         }
 
-        public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole)
+        public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
         {
-            var orders = await _context.Orders.Include(n => n.OrderItems).
-                ThenInclude(n => n.Movie).
-                Where(n => n.UserId == userId).ToListAsync();
-
-            if (userRole != "Admin")
-            {
-                orders = orders.Where(n => n.UserId == userId).ToList();
-            }
-
+            var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.Movie).Where(n => n.UserId == userId).ToListAsync();
             return orders;
         }
 
