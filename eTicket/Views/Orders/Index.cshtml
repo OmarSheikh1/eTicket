@@ -103,7 +103,8 @@
             },
             //Execute the payment
             onAuthorize: function (data, actions) {
-                return actions.payment.execute().then(function() {
+                return actions.payment.execute().then(function(data) {
+                    console.log(data);
                     var url = '@Url.Action("CompleteOrders","Orders",new {})';
                     window.location.href = url;
                 });
