@@ -1,5 +1,6 @@
 ﻿using eTicket.Data;
 using eTicket.Models;
+using eTicket.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,9 +24,31 @@ namespace eTicket.Controllers
 
 
 
-        public IActionResult Index()
+        public IActionResult Login() => View(new LoginVM());
+
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM loginVM)
         {
-            return View();
+            if (!ModelState.IsValid) return View(loginVM);
+
+            var user = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
+            if (user != null)
+            {
+                var pwdCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
+                if (pwdCheck)
+                {
+                    var result = _signInManager.PasswordSignInAsync(user,loginVM.EmailAddress,false,false);
+                    if (result.IsCompletedSuccessfully)
+                    {
+                        return RedirectToAction("Index","Movies");
+                    }
+                }
+                TempData["Error"] = "Invalid credentials, Please try again.";
+                return View(loginVM);
+            }
+            TempData["Error"] = "Invalid credentials, Please try again.";
+            return View(loginVM);
         }
     }
 }
