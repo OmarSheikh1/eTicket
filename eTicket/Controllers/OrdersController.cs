@@ -2,6 +2,7 @@
 using eTicket.Data.Services;
 using eTicket.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace eTicket.Controllers
 {
@@ -21,8 +22,9 @@ namespace eTicket.Controllers
 
         public async Task<IActionResult> AllOrders()
         {
-            string userId = "";
-            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            string userId = User.FindFirstValue(ClaimTypes.Name);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            var orders = await _ordersService.GetOrdersByUserIdAndRoleAsync(userId,userRole);
             return View(orders);
         }
 
