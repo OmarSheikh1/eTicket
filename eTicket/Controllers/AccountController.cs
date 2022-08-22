@@ -4,6 +4,7 @@ using eTicket.Models;
 using eTicket.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Principal;
 
 namespace eTicket.Controllers
 {
@@ -36,19 +37,20 @@ namespace eTicket.Controllers
             var user = await _userManager.FindByEmailAsync(loginVM.EmailAddress);
             if (user != null)
             {
-                var pwdCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
-                if (pwdCheck)
+                var passwordCheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
+                if (passwordCheck)
                 {
-                    var result = _signInManager.PasswordSignInAsync(user, loginVM.EmailAddress, false, false);
-                    if (result.IsCompletedSuccessfully)
+                    var result = await _signInManager.PasswordSignInAsync(user, loginVM.Password, false, false);
+                    if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Movies");
                     }
                 }
-                TempData["Error"] = "Invalid credentials, Please try again.";
+                TempData["Error"] = "Wrong credentials. Please, try again!";
                 return View(loginVM);
             }
-            TempData["Error"] = "Invalid credentials, Please try again.";
+
+            TempData["Error"] = "Wrong credentials. Please, try again!";
             return View(loginVM);
         }
 
@@ -58,22 +60,33 @@ namespace eTicket.Controllers
         public async Task<IActionResult> Register(RegisterVM registerVM)
         {
             if (!ModelState.IsValid) return View(registerVM);
+
             var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
             if (user != null)
             {
-                TempData["Error"] = "User already exists!!!";
+                TempData["Error"] = "This email address is already in use";
                 return View(registerVM);
             }
+
             var newUser = new ApplicationUser()
             {
                 FullName = registerVM.FullName,
                 Email = registerVM.EmailAddress,
                 UserName = registerVM.EmailAddress
             };
-            var newUserResponse = _userManager.CreateAsync(newUser,registerVM.Password);
-            if (newUserResponse.IsCompletedSuccessfully)
+            var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
+
+            if (newUserResponse.Succeeded)
                 await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+
             return View("RegisterCompleted");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index","Movies");
         }
     }
 }
